@@ -3,7 +3,7 @@ FROM python:3.9-slim
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
-ENV DJANGO_SETTINGS_MODULE=ideathon_2024_webpage.settings
+ENV DJANGO_SETTINGS_MODULE=ideathon.settings
 
 # Set the working directory
 WORKDIR /app
