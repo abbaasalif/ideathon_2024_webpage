@@ -1,0 +1,31 @@
+{% extends "main/base.html" %}
+{% load static %} <!-- Load the static tag library -->
+
+{% block title %}IdEEEathon 2024{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <!-- IEEE GSU Student Branch Logo -->
+    <img src="{% static 'images/ieee_at_GSU.png' %}" alt="IEEE GSU Logo" class="mb-4" style="width: 250px;">
+
+    <h2>Welcome to IdEEEathon 2024</h2>
+    <p>Only <strong>{{ remaining_spots }}</strong> registration spots left!</p>
+
+    <!-- Register and Program Buttons -->
+    <div class="mt-4">
+        <a href="{% url 'register' %}" class="btn btn-primary btn-lg mb-2">Register</a>
+        <a href="{% url 'program' %}" class="btn btn-secondary btn-lg mb-2">Program</a>
+    </div>
+
+    <!-- Sponsored by Section -->
+    <div class="sponsored-by mt-5">
+        <h4>Sponsored by</h4>
+        <div class="d-flex justify-content-center align-items-center mt-3" style="gap: 50px;">
+            <img src="{% static 'images/ieee_ras.png' %}" alt="IEEE Robotics & Automation Society" class="sponsor-logo" style="width: 200px;">
+            <img src="{% static 'images/ieee_atlanta.png' %}" alt="IEEE Atlanta Section" class="sponsor-logo" style="width: 200px;">
+            <img src="{% static 'images/ieee_embs.png' %}" alt="IEEE EMBS" class="sponsor-logo" style="width: 200px;">
+            <img src="{% static 'images/ieee_yp.png' %}" alt="IEEE Young Professionals" class="sponsor-logo" style="width: 200px;">
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}IdEEEathon{% endblock %}</title>
+        <style>
+            /* Shared styling */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: white;
+                color: rgb(0, 0, 0);
+            }
+            .container {
+                width: 80%;
+                margin: auto;
+                padding: 20px;
+                text-align: center;
+            }
+            .header {
+                display: flex;               /* Use flexbox */
+                align-items: center;         /* Center vertically */
+                justify-content: center;     /* Center horizontally */
+                background-color: rgb(65, 133, 188);
+                color: white;
+                padding: 0px;
+                margin-top: 0;
+                height: 100px;               /* Set height for vertical centering */
+            }
+            .btn {
+                background-color: rgb(65, 133, 188);
+                color: white;
+                padding: 10px 20px;
+                text-decoration: none;
+                border-radius: 5px;
+                display: inline-block;
+                margin: 5px;
+            }
+            h1, h2 {
+                margin-top: 0;
+            }
+            .footer {
+                background-color: rgb(65, 133, 188);
+                color: white;
+                text-align: center;
+                padding: 10px 0;
+                margin-top: 20px;
+                font-size: 0.9em;
+            }
+            .program-container {
+                width: 80%;
+                margin: auto;
+                max-width: 800px;
+                text-align: justify;
+            }
+            .text-center {
+                text-align: center;
+            }
+            /* Main list for event sections */
+            .main-list {
+                padding-left: 20px;
+                font-size: 1.05em;
+                counter-reset: main-section;
+                list-style: none;
+                color: black; /* Set main list text to black */
+            }
+            .main-list > li {
+                margin-bottom: 20px;
+                position: relative;
+                padding-left: 25px;
+            }
+            .main-list > li::before {
+                counter-increment: main-section;
+                content: counter(main-section) ". ";
+                position: absolute;
+                left: 0;
+                font-weight: bold;
+                color: black;
+            }
+            .main-list > li > p {
+                font-weight: bold;
+                color: black;
+                display: inline;
+                margin-left: 2px;
+            }
+            /* Sub-list styling */
+            .sub-list {
+                list-style: none; /* Remove bullets entirely */
+                padding-left: 25px;
+                margin-top: 5px;
+                font-size: 0.95em;
+                color: black; /* Set sub-list text to black */
+            }
+            .sub-list li {
+                margin-bottom: 5px;
+                padding-left: 0;
+            }
+            ul {
+                list-style-type: none !important;
+            }
+        </style>
+    </head>
+    
+    
+<body>
+    <div class="header">
+        <h1><span style="color: rgb(255, 255, 255);">I</span><span style="color: #000000;">d</span><span style="color: rgb(255, 255, 255);">EEE</span><span style="color:rgb(0, 0, 0)">athon 2024</span></h1>
+    </div>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 IdEEEathon | IEEE @ GSU Student Branch</p>
+    </div>
+</body>
+</html>

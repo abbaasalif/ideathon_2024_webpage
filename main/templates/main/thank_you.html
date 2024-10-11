@@ -1,0 +1,12 @@
+<!-- templates/main/thank_you.html -->
+{% extends "main/base.html" %}
+
+{% block title %}Thank You{% endblock title %}
+
+{% block content %}
+<div class="container text-center">
+    <h2>Thank You for Registering!</h2>
+    <p>We have received your registration for IdEEEathon 2024.</p>
+    <a href="{% url 'landing' %}" class="btn btn-info mt-3">Back to Home</a>
+</div>
+{% endblock content %}

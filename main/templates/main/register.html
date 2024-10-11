@@ -1,0 +1,177 @@
+<!-- templates/main/register.html -->
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Register for IdEEEathon{% endblock %}
+
+{% block content %}
+<div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;">
+    <div class="container d-flex flex-column align-items-center justify-content-center" style="max-width: 600px;">
+        <div class="card p-5 shadow-lg" style="width: 100%; max-width: 600px; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 15px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+            <!-- IEEE GSU Logo -->
+            <div class="text-center my-3">
+                <img src="{% static 'images/IEEE_at_GSU.png' %}" alt="IEEE GSU Logo" style="width: 200px;">
+            </div>
+
+            <h3 class="text-center mb-3">Register for IdEEEathon</h3>
+            <p class="text-center">Remaining spots: <strong>{{ remaining_spots }}</strong></p>
+
+            <form method="post" class="mt-4">
+                {% csrf_token %}
+                
+                <!-- Registration Type Selection -->
+                <div class="form-group mb-3">
+                    <label class="font-weight-bold">Choose Registration Type</label>
+                    <div class="d-flex justify-content-center">
+                        <label class="mr-3">
+                            <input type="radio" name="registration_type" value="individual" required onclick="toggleTeamFields()"> Register Individually
+                        </label>
+                        <label>
+                            <input type="radio" name="registration_type" value="team" required onclick="toggleTeamFields()"> Register as Team
+                        </label>
+                    </div>
+                </div>
+
+                <!-- First User Fields -->
+                <div class="form-group mb-3">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Panther ID</label>
+                    <input type="number" name="panther_id" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Degree</label>
+                    <select name="degree" class="form-control" required>
+                        <option value="Bachelors">Bachelors</option>
+                        <option value="Masters">Masters</option>
+                        <option value="PhD">PhD</option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Major</label>
+                    <input type="text" name="major" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Have you done CSC 1302?</label>
+                    <select name="csc_1302" class="form-control" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+
+                <!-- Second User Fields for Team Registration (Initially Hidden) -->
+                <div id="teamFields" style="display: none;">
+                    <h5 class="font-weight-bold mt-4">Teammate Information</h5>
+
+                    <div class="form-group mb-3">
+                        <label>First Name</label>
+                        <input type="text" name="team_member_2_first_name" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Last Name</label>
+                        <input type="text" name="team_member_2_last_name" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Email</label>
+                        <input type="email" name="team_member_2_email" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Panther ID</label>
+                        <input type="number" name="team_member_2_panther_id" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Degree</label>
+                        <select name="team_member_2_degree" class="form-control">
+                            <option value="Bachelors">Bachelors</option>
+                            <option value="Masters">Masters</option>
+                            <option value="PhD">PhD</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Major</label>
+                        <input type="text" name="team_member_2_major" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Has teammate done CSC 1302?</label>
+                        <select name="team_member_2_csc_1302" class="form-control">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary w-100 mt-4" style="background-color: #6a1b9a; border-color: #6a1b9a;">Sign Up</button>
+            </form>
+        </div>
+
+        <!-- Sponsors Section -->
+        <div class="mt-5 text-center">
+            <h4>Sponsored by</h4>
+            <div class="d-flex justify-content-center align-items-center flex-wrap mt-3">
+                <img src="{% static 'images/ieee_ras.png' %}" alt="IEEE Robotics & Automation Society" class="mx-2 mb-2" style="width: 120px;">
+                <img src="{% static 'images/ieee_atlanta.png' %}" alt="IEEE Atlanta Section" class="mx-2 mb-2" style="width: 120px;">
+                <img src="{% static 'images/ieee_embs.png' %}" alt="IEEE EMBS" class="mx-2 mb-2" style="width: 120px;">
+                <img src="{% static 'images/ieee_yp.png' %}" alt="IEEE Young Professionals" class="mx-2 mb-2" style="width: 120px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script to toggle visibility of team fields -->
+<script>
+    function toggleTeamFields() {
+        const teamFields = document.getElementById("teamFields");
+        const isTeam = document.querySelector('input[name="registration_type"]:checked').value === "team";
+        
+        if (isTeam) {
+            teamFields.style.display = "block";
+            document.querySelectorAll('#teamFields input, #teamFields select').forEach(field => field.required = true);
+        } else {
+            teamFields.style.display = "none";
+            document.querySelectorAll('#teamFields input, #teamFields select').forEach(field => field.required = false);
+        }
+    }
+</script>
+
+<style>
+    /* Increase font size for headers and text */
+    h3, label, .form-group label, .btn {
+        font-size: 1em;
+    }
+
+    /* Larger input fields */
+    .form-control {
+        font-size: 1em;
+        padding: 8px;
+    }
+
+    /* Add more spacing between form items */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    /* Glow effect on input focus */
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0px 0px 8px rgba(33, 150, 243, 0.6); /* Blue glow */
+        border-color: #2196f3; /* Blue border */
+    }
+
+    /* Adjust the button size */
+    .btn {
+        font-size: 1em;
+        padding: 12px;
+    }
+</style>
+{% endblock content %}
