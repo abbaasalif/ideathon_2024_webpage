@@ -5,6 +5,8 @@ services:
     build: .
     ports:
       - "80:8000"
+    volumes:
+      - ./db.sqlite3:/app/db.sqlite3
     environment:
       DJANGO_SETTINGS_MODULE: ideathon.settings
     command: >
