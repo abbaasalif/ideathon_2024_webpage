@@ -199,6 +199,34 @@
 
 <style>
     .error {
+            /* Increase font size for headers and text */
+    h3, label, .form-group label, .btn {
+        font-size: 1em;
+    }
+
+    /* Larger input fields */
+    .form-control {
+        font-size: 1em;
+        padding: 8px;
+    }
+
+    /* Add more spacing between form items */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    /* Glow effect on input focus */
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0px 0px 8px rgba(33, 150, 243, 0.6); /* Blue glow */
+        border-color: #2196f3; /* Blue border */
+    }
+
+    /* Adjust the button size */
+    .btn {
+        font-size: 1em;
+        padding: 12px;
+    }
         font-size: 0.9em;
         color: #d9534f; /* Red color for error messages */
     }
