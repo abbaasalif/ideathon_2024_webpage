@@ -3,6 +3,7 @@
 from django.shortcuts import render
 from .models import RegisteredMember
 from .forms import RegistrationForm
+import re
 
 # Set the maximum number of registrations allowed
 MAX_REGISTRATIONS = 20
