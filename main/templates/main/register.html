@@ -1,4 +1,3 @@
-<!-- templates/main/register.html -->
 {% extends "main/base.html" %}
 {% load static %}
 
@@ -16,9 +15,18 @@
             <h3 class="text-center mb-3">Register for IdEEEathon</h3>
             <p class="text-center">Remaining spots: <strong>{{ remaining_spots }}</strong></p>
 
+            <!-- Display any non-field errors at the top -->
             <form method="post" class="mt-4">
                 {% csrf_token %}
-                
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
                 <!-- Registration Type Selection -->
                 <div class="form-group mb-3">
                     <label class="font-weight-bold">Choose Registration Type</label>
@@ -30,24 +38,39 @@
                             <input type="radio" name="registration_type" value="team" required onclick="toggleTeamFields()"> Register as Team
                         </label>
                     </div>
+                    {% if form.registration_type.errors %}
+                        <div class="error text-danger">{{ form.registration_type.errors.0 }}</div>
+                    {% endif %}
                 </div>
 
                 <!-- First User Fields -->
                 <div class="form-group mb-3">
                     <label>First Name</label>
                     <input type="text" name="first_name" class="form-control" required>
+                    {% if form.first_name.errors %}
+                        <div class="error text-danger">{{ form.first_name.errors.0 }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group mb-3">
                     <label>Last Name</label>
                     <input type="text" name="last_name" class="form-control" required>
+                    {% if form.last_name.errors %}
+                        <div class="error text-danger">{{ form.last_name.errors.0 }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group mb-3">
                     <label>Email</label>
                     <input type="email" name="email" class="form-control" required>
+                    {% if form.email.errors %}
+                        <div class="error text-danger">{{ form.email.errors.0 }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group mb-3">
                     <label>Panther ID</label>
                     <input type="number" name="panther_id" class="form-control" required>
+                    {% if form.panther_id.errors %}
+                        <div class="error text-danger">{{ form.panther_id.errors.0 }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group mb-3">
                     <label>Degree</label>
@@ -56,10 +79,16 @@
                         <option value="Masters">Masters</option>
                         <option value="PhD">PhD</option>
                     </select>
+                    {% if form.degree.errors %}
+                        <div class="error text-danger">{{ form.degree.errors.0 }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group mb-3">
                     <label>Major</label>
                     <input type="text" name="major" class="form-control" required>
+                    {% if form.major.errors %}
+                        <div class="error text-danger">{{ form.major.errors.0 }}</div>
+                    {% endif %}
                 </div>
                 <div class="form-group mb-3">
                     <label>Have you done CSC 1302?</label>
@@ -67,6 +96,9 @@
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
                     </select>
+                    {% if form.csc_1302.errors %}
+                        <div class="error text-danger">{{ form.csc_1302.errors.0 }}</div>
+                    {% endif %}
                 </div>
 
                 <!-- Second User Fields for Team Registration (Initially Hidden) -->
@@ -76,18 +108,30 @@
                     <div class="form-group mb-3">
                         <label>First Name</label>
                         <input type="text" name="team_member_2_first_name" class="form-control">
+                        {% if form.team_member_2_first_name.errors %}
+                            <div class="error text-danger">{{ form.team_member_2_first_name.errors.0 }}</div>
+                        {% endif %}
                     </div>
                     <div class="form-group mb-3">
                         <label>Last Name</label>
                         <input type="text" name="team_member_2_last_name" class="form-control">
+                        {% if form.team_member_2_last_name.errors %}
+                            <div class="error text-danger">{{ form.team_member_2_last_name.errors.0 }}</div>
+                        {% endif %}
                     </div>
                     <div class="form-group mb-3">
                         <label>Email</label>
                         <input type="email" name="team_member_2_email" class="form-control">
+                        {% if form.team_member_2_email.errors %}
+                            <div class="error text-danger">{{ form.team_member_2_email.errors.0 }}</div>
+                        {% endif %}
                     </div>
                     <div class="form-group mb-3">
                         <label>Panther ID</label>
                         <input type="number" name="team_member_2_panther_id" class="form-control">
+                        {% if form.team_member_2_panther_id.errors %}
+                            <div class="error text-danger">{{ form.team_member_2_panther_id.errors.0 }}</div>
+                        {% endif %}
                     </div>
                     <div class="form-group mb-3">
                         <label>Degree</label>
@@ -96,10 +140,16 @@
                             <option value="Masters">Masters</option>
                             <option value="PhD">PhD</option>
                         </select>
+                        {% if form.team_member_2_degree.errors %}
+                            <div class="error text-danger">{{ form.team_member_2_degree.errors.0 }}</div>
+                        {% endif %}
                     </div>
                     <div class="form-group mb-3">
                         <label>Major</label>
                         <input type="text" name="team_member_2_major" class="form-control">
+                        {% if form.team_member_2_major.errors %}
+                            <div class="error text-danger">{{ form.team_member_2_major.errors.0 }}</div>
+                        {% endif %}
                     </div>
                     <div class="form-group mb-3">
                         <label>Has teammate done CSC 1302?</label>
@@ -107,6 +157,9 @@
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
                         </select>
+                        {% if form.team_member_2_csc_1302.errors %}
+                            <div class="error text-danger">{{ form.team_member_2_csc_1302.errors.0 }}</div>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -145,33 +198,9 @@
 </script>
 
 <style>
-    /* Increase font size for headers and text */
-    h3, label, .form-group label, .btn {
-        font-size: 1em;
-    }
-
-    /* Larger input fields */
-    .form-control {
-        font-size: 1em;
-        padding: 8px;
-    }
-
-    /* Add more spacing between form items */
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    /* Glow effect on input focus */
-    .form-control:focus {
-        outline: none;
-        box-shadow: 0px 0px 8px rgba(33, 150, 243, 0.6); /* Blue glow */
-        border-color: #2196f3; /* Blue border */
-    }
-
-    /* Adjust the button size */
-    .btn {
-        font-size: 1em;
-        padding: 12px;
+    .error {
+        font-size: 0.9em;
+        color: #d9534f; /* Red color for error messages */
     }
 </style>
 {% endblock content %}
