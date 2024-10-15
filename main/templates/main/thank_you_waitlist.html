@@ -1,0 +1,12 @@
+<!-- templates/main/thank_you_waitlist.html -->
+{% extends "main/base.html" %}
+
+{% block title %}Thank You{% endblock title %}
+
+{% block content %}
+<div class="container text-center">
+    <h2>Thank You for Waitlisting!</h2>
+    <p>If a spot opens up we will get in touch with you!</p>
+    <a href="{% url 'landing' %}" class="btn btn-info mt-3">Back to Home</a>
+</div>
+{% endblock content %}

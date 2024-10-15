@@ -1,8 +1,8 @@
 # main/views.py
 
 from django.shortcuts import render
-from .models import RegisteredMember
-from .forms import RegistrationForm
+from .models import RegisteredMember, WaitlistMember
+from .forms import RegistrationForm, WaitlistForm
 import re
 
 # Set the maximum number of registrations allowed
@@ -78,6 +78,20 @@ def register(request):
         form = RegistrationForm()
 
     return render(request, 'main/register.html', {'form': form, 'remaining_spots': remaining_spots})
+
+def waitlist(request):
+    """
+    View for the waitlist page. Collects individual waitlist entries without any cap.
+    """
+    if request.method == 'POST':
+        form = WaitlistForm(request.POST)
+        if form.is_valid():
+            form.save()  # Save the individual to the waitlist
+            return render(request, 'main/thank_you_waitlist.html')
+    else:
+        form = WaitlistForm()
+
+    return render(request, 'main/waitlist.html', {'form': form})
 
 def program(request):
     """
