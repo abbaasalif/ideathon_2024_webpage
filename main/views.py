@@ -6,7 +6,7 @@ from .forms import RegistrationForm
 import re
 
 # Set the maximum number of registrations allowed
-MAX_REGISTRATIONS = 20
+MAX_REGISTRATIONS = 30
 
 def landing_page(request):
     """
