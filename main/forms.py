@@ -101,3 +101,7 @@ class WaitlistForm(forms.ModelForm):
         if WaitlistMember.objects.filter(panther_id=panther_id).exists():
             raise ValidationError("This Panther ID is already waitlisted.")
         return panther_id
+    def clean_csc_1302(self):
+        # Convert 'yes'/'no' to True/False
+        csc_1302 = self.cleaned_data['csc_1302']
+        return csc_1302 == 'yes'
